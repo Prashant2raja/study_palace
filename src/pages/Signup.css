@@ -1,0 +1,106 @@
+/* Signup.css */
+
+.signup-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 25px 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-heading {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signup-field {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signup-field label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .signup-field input,
+  .signup-field textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  
+  .signup-field input:focus,
+  .signup-field textarea:focus {
+    border-color: #007bff;
+  }
+  
+  .signup-photo-group {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .signup-photo-label {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .signup-photo-label input[type="file"] {
+    display: none;
+  }
+  
+  .signup-photo-preview {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #007bff;
+  }
+  
+  .signup-button {
+    background-color: #28a745;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-button:hover {
+    background-color: #218838;
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 600px) {
+    .signup-container {
+      margin: 20px;
+      padding: 20px;
+    }
+  
+    .signup-heading {
+      font-size: 20px;
+    }
+  }
+  

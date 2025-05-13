@@ -1,0 +1,40 @@
+/* Payments.css */
+
+.payments-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 24px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.payments-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.payments-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #3399cc;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.payments-button:hover {
+  background-color: #287ba0;
+}
+
+.payment-error {
+  font-size: 18px;
+  color: #dc3545;
+  margin-top: 20px;
+}

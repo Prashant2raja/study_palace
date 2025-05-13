@@ -1,0 +1,52 @@
+/* src/components/Navbar.css */
+
+nav {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e2e2e2;
+    padding: 0.5rem 1rem;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  nav ul li {
+    margin-right: 1.5rem;
+  }
+  
+  nav ul li:last-child {
+    margin-right: 0;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  nav ul li a:hover,
+  nav ul li a.active {
+    background-color: #e0e0e0;
+  }
+  
+  nav ul li button {
+    background: none;
+    border: none;
+    color: #333;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font: inherit;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  nav ul li button:hover {
+    background-color: #e0e0e0;
+  }
+  

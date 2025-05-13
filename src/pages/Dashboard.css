@@ -1,0 +1,98 @@
+/* General container styling */
+.dashboard-container {
+  padding-top: 80px; /* Space for fixed navbar */
+  text-align: center;
+  background-color: #f8f8f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Background area */
+.background-image {
+  background: linear-gradient(to right, #e3f2fd, #ffffff);
+  padding: 30px 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Heading and image area */
+.dashboard-heading-with-images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.dashboard-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1a237e;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Side icons for heading */
+.side-icon {
+  width: 50px;
+  height: 50px;
+}
+
+/* Glowing logo */
+.glowing-logo {
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 3px #2196f3);
+  }
+  to {
+    filter: drop-shadow(0 0 12px #0d47a1);
+  }
+}
+
+/* Moving image animation */
+.moving-image {
+  animation: moveY 3s ease-in-out infinite;
+}
+
+@keyframes moveY {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+/* Paragraph under heading */
+.dashboard-paragraph {
+  font-size: 1.1rem;
+  color: #333;
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+}
+
+/* Content section with Hindi text */
+.content-container {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.hindi-text {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #4e342e;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Image strip at bottom */
+.image-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 30px 10px;
+  background-color: #e3f2fd;
+}

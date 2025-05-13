@@ -1,0 +1,144 @@
+/* ── Main Seat Container ────────────────────────────── */
+.seat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  align-items: center;
+}
+
+/* ── Seat Rows ───────────────────────────────────────── */
+.seat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* ── Seat Box ────────────────────────────────────────── */
+.seat-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid #ccc;
+  transition: transform 0.2s ease;
+  background-color: #eee;
+}
+
+.seat-box:hover {
+  transform: scale(1.05);
+}
+
+/* ── Seat Status Colors ──────────────────────────────── */
+.seat-box.available {
+  background-color: #6fcf97; /* green */
+  color: white;
+}
+
+.seat-box.limited {
+  background-color: #4a90e2; /* blue */
+  color: white;
+}
+
+.seat-box.all-shifts {
+  background-color: #eb5757; /* red */
+  color: white;
+}
+
+/* ── Disable booked seats ───────────────────────────── */
+.seat-box.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ── Popup for time slot selection ───────────────────── */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.popup-content button {
+  margin: 8px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ── Filter Bar for Time Slots ───────────────────────── */
+.filter-bar {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.filter-bar button {
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: white;
+  transition: background-color 0.2s;
+}
+
+.filter-bar button.active {
+  background: #4a90e2;
+  color: white;
+}
+
+/* ── Legend ───────────────────────────────────────────── */
+.legend {
+  margin-top: 30px;
+  width: 90%;
+  max-width: 600px;
+}
+
+.legend h4 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.legend-box {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #333;
+}
+
+.legend-box.available {
+  background-color: #6fcf97;
+}
+
+.legend-box.limited {
+  background-color: #4a90e2;
+}
+
+.legend-box.all-shifts {
+  background-color: #eb5757;
+}

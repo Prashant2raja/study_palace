@@ -1,0 +1,101 @@
+/* src/pages/Login.css */
+
+.login-container {
+    max-width: 400px;
+    margin: 5rem auto;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  
+  .login-heading {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .login-role-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-role-toggle label {
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .login-form label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+  
+  .login-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+  
+  .login-input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .login-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .login-forgot {
+    font-size: 0.875rem;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-forgot:hover {
+    text-decoration: underline;
+  }
+  
+  .login-button {
+    background: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .login-button:hover {
+    background: #0056b3;
+  }
+  
+  .login-signup {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .login-signup a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-signup a:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,79 @@
+/* Profile.css */
+.profile-container {
+  max-width: 650px;
+  margin: 50px auto;
+  padding: 25px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+}
+
+.profile-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #ccc;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.profile-info {
+  font-size: 16px;
+  margin: 8px 0;
+  color: #555;
+}
+
+.profile-id-section {
+  margin-top: 20px;
+  background: #eee;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.profile-form input[type="text"],
+.profile-form input[type="password"],
+.profile-form input[type="file"],
+.profile-form select {
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.btn-edit,
+.btn-save,
+.btn-cancel {
+  margin: 10px 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-edit {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.btn-save {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+.btn-cancel {
+  background-color: #f44336;
+  color: #fff;
+}
