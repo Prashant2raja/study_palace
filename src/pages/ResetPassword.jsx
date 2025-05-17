@@ -13,7 +13,7 @@ export default function ResetPassword() {
   const handle = async e => {
     e.preventDefault();
     if (pw !== cpw) return alert('Passwords must match');
-    await axios.post(`http://localhost:8080/reset-password/${token}`, { password: pw });
+    await axios.post(`https://studypalacebackend-production.up.railway.app/reset-password/${token}`, { password: pw });
     alert('Password reset! Please log in.');
     navigate('/login');
   };
