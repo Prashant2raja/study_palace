@@ -31,7 +31,7 @@ export default function Profile() {
       return;
     }
 
-    axios.get(`https://studypalacebackend-production.up.railway.app/api/user/${email}`, { headers: authHeader })
+    axios.get(`https://studypalacebackend-production.up.railway.app/user/${email}`, { headers: authHeader })
       .then(res => {
         setUser(res.data);
         setFormData({
@@ -79,7 +79,7 @@ export default function Profile() {
 
     try {
       await axios.put(
-        `https://studypalacebackend-production.up.railway.app/api/user/${email}`,
+        `https://studypalacebackend-production.up.railway.app/user/${email}`,
         data,
         { headers: authHeader }
       );
