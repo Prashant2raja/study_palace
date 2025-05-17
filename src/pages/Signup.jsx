@@ -42,7 +42,7 @@ export default function Signup() {
 
     try {
       // let axios set Content-Type with proper boundary
-      const res = await axios.post('https://studypalacebackend-production.up.railway.app/signup', data);
+      const res = await axios.post('https://studypalacebackend-production.up.railway.app/api/signup', data);
       alert(res.data.message);
       navigate('/login');
     } catch (err) {
