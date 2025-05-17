@@ -8,7 +8,7 @@ export default function ForgotPassword() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('https://studypalacebackend-production.up.railway.app/forgot-password', { email });
+      await axios.post('https://studypalacebackend-production.up.railway.app/api/forgot-password', { email });
       alert('Check your inbox for the reset link.');
     } catch (e) {
       alert(e.response?.data?.error || 'Error sending link');
