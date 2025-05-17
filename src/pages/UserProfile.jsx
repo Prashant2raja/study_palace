@@ -13,7 +13,7 @@ export default function UserProfile() {
   // Fetch signup records
   const fetchUsers = () => {
     setLoading(true);
-    axios.get('http://localhost:8080/api/signup')
+    axios.get('https://studypalacebackend-production.up.railway.app/api/signup')
       .then(res => setUsers(res.data))
       .catch(() => setError('Failed to fetch data'))
       .finally(() => setLoading(false));
@@ -26,7 +26,7 @@ export default function UserProfile() {
   const handleDelete = async id => {
     if (!window.confirm('Are you sure you want to delete this record?')) return;
     try {
-      await axios.delete(`http://localhost:8080/api/signup/${id}`);
+      await axios.delete(`https://studypalacebackend-production.up.railway.app/api/signup/${id}`);
       fetchUsers();
     } catch {
       alert('Failed to delete');
