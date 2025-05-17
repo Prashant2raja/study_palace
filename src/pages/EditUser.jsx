@@ -19,7 +19,7 @@ export default function EditUser() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/signup`)
+    axios.get(`https://studypalacebackend-production.up.railway.app/api/signup`)
       .then(res => {
         const user = res.data.find(u => u.id === +id);
         if (!user) throw new Error('Not found');
@@ -46,7 +46,7 @@ export default function EditUser() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8080/api/signup/${id}`, form);
+      await axios.put(`https://studypalacebackend-production.up.railway.app/api/signup/${id}`, form);
       alert('User updated');
       navigate('/admin/users');  // wherever your list lives
     } catch {
