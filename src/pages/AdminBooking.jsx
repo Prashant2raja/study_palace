@@ -9,7 +9,7 @@ export default function AdminBooking() {
 
   useEffect(() => {
   axios
-    .get("http://localhost:8080/admin/book", {
+    .get("https://studypalacebackend-production.up.railway.app/admin/book", {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((res) => setBookings(res.data))
