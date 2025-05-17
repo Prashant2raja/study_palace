@@ -32,12 +32,12 @@ export default function SeatBooking() {
     localStorage.setItem("filterSlot", filterSlot);
 
     const slotRequest = axios.get(
-      `http://localhost:8080/api/seats?timeSlot=${filterSlot}`,
+      `https://studypalacebackend-production.up.railway.app/api/seats?timeSlot=${filterSlot}`,
       { headers: authHeader }
     );
 
     const allDayRequest = axios.get(
-      `http://localhost:8080/api/seats?timeSlot=7am-10pm`,
+      `https://studypalacebackend-production.up.railway.app/api/seats?timeSlot=7am-10pm`,
       { headers: authHeader }
     );
 
@@ -82,7 +82,7 @@ export default function SeatBooking() {
   const handleTimeSelect = (slot) => {
     axios
       .post(
-        "http://localhost:8080/api/bookings",
+        "https://studypalacebackend-production.up.railway.app/api/bookings",
         { seat_number: selectedSeat, time_slot: slot },
         { headers: authHeader }
       )
