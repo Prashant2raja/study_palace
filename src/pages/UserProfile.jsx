@@ -24,14 +24,23 @@ export default function UserProfile() {
   }, []);
 
   const handleDelete = async id => {
-    if (!window.confirm('Are you sure you want to delete this record?')) return;
-    try {
-      await axios.delete(`https://studypalacebackend-production.up.railway.app/api/signup/${id}`);
-      fetchUsers();
-    } catch {
-      alert('Failed to delete');
-    }
-  };
+  if (!window.confirm('Are you sure you want to delete this record?')) return;
+  
+  const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+  
+  try {
+    await axios.delete(`https://studypalacebackend-production.up.railway.app/api/admin/user/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    fetchUsers(); // Refresh the list after deletion
+  } catch (error) {
+    console.error('Delete failed:', error.response?.data || error.message);
+    alert('Failed to delete');
+  }
+};
+
 
   const handleEdit = id => {
     navigate(`/admin/edit-user/${id}`);
