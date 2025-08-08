@@ -1,14 +1,16 @@
-/* Hamburger Button */
 .navbar__hamburger {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 25px;
-  height: 20px;
+  width: 28px;
+  height: 22px;
   background: none;
   border: none;
   cursor: pointer;
-  margin-left: auto;
+  position: absolute;
+  top: 20px;     /* increased padding from top */
+  right: 20px;   /* increased padding from right */
+  z-index: 1100;
 }
 
 .navbar__hamburger .bar {
@@ -16,7 +18,9 @@
   width: 100%;
   background-color: #333;
   border-radius: 2px;
+  margin: 3px 0; /* spacing between bars */
 }
+
 
 /* Mobile Styles */
 @media (max-width: 768px) {
