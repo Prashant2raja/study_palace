@@ -1,4 +1,4 @@
-/* Profile.css */
+/* Base Container */
 .profile-container {
   max-width: 650px;
   margin: 50px auto;
@@ -7,10 +7,13 @@
   border-radius: 12px;
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
-  background: #f9f9f9;
+  background: linear-gradient(to right, #f0f0f0, #f9f9f9);
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.7s ease-in-out;
+  transition: all 0.3s ease;
 }
 
+/* Avatar */
 .profile-avatar {
   width: 140px;
   height: 140px;
@@ -18,49 +21,74 @@
   object-fit: cover;
   margin-bottom: 15px;
   border: 3px solid #ccc;
+  transition: transform 0.3s ease-in-out;
 }
 
+.profile-avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Heading */
 .profile-name {
   font-size: 24px;
   font-weight: bold;
   color: #333;
+  margin-top: 10px;
 }
 
+/* Text Info */
 .profile-info {
   font-size: 16px;
   margin: 8px 0;
-  color: #555;
+  color: #444;
+  line-height: 1.4;
 }
 
+/* Govt ID */
 .profile-id-section {
   margin-top: 20px;
   background: #eee;
-  padding: 10px;
+  padding: 12px;
   border-radius: 8px;
+  font-size: 15px;
+  color: #333;
+  animation: slideIn 0.5s ease;
 }
 
+/* Form Inputs */
 .profile-form input[type="text"],
 .profile-form input[type="password"],
 .profile-form input[type="file"],
 .profile-form select {
   display: block;
   margin: 10px auto;
-  padding: 8px;
-  width: 80%;
+  padding: 10px;
+  width: 85%;
   border: 1px solid #ccc;
   border-radius: 6px;
+  font-size: 15px;
+  transition: all 0.3s ease;
 }
 
+.profile-form input:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 6px rgba(33, 150, 243, 0.3);
+}
+
+/* Buttons */
 .btn-edit,
 .btn-save,
-.btn-cancel {
-  margin: 10px 8px;
+.btn-cancel,
+.btn-pay {
+  margin: 10px 6px;
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .btn-edit {
@@ -76,4 +104,89 @@
 .btn-cancel {
   background-color: #f44336;
   color: #fff;
+}
+
+.btn-pay {
+  background-color: #ff9800;
+  color: white;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.btn-edit:hover,
+.btn-save:hover,
+.btn-cancel:hover,
+.btn-pay:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+  .profile-container {
+    margin: 20px 15px;
+    padding: 20px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+
+  .profile-avatar {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 10px;
+  }
+
+  .profile-name {
+    font-size: 20px;
+  }
+
+  .profile-info {
+    font-size: 15px;
+    margin: 6px 0;
+  }
+
+  .profile-form input[type="text"],
+  .profile-form input[type="password"],
+  .profile-form input[type="file"],
+  .profile-form select {
+    width: 95%;
+    font-size: 14px;
+  }
+
+  .btn-edit,
+  .btn-save,
+  .btn-cancel,
+  .btn-pay {
+    width: 90%;
+    font-size: 15px;
+    margin: 8px 0;
+  }
+
+  .profile-id-section {
+    font-size: 14px;
+  }
 }
