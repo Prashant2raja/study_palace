@@ -94,7 +94,7 @@ export default function Profile() {
 
   if (!user) return <p>Loading...</p>;
 
-  const bookedDateObj = user.created_at ? new Date(user.created_at) : null;
+  const bookedDateObj = user.updated_at ? new Date(user.updated_at) : null;
   const formattedBookedDate = bookedDateObj
     ? bookedDateObj.toISOString().split('T')[0].replace(/-/g, '/')
     : 'NA';
