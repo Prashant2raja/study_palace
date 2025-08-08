@@ -107,8 +107,9 @@ export default function Profile() {
     : 'NA';
 
   const validDays = validTillObj
-    ? Math.ceil((validTillObj - new Date()) / (24 * 60 * 60 * 1000))
-    : 0;
+  ? Math.max(0, Math.ceil((validTillObj - new Date()) / (24 * 60 * 60 * 1000)))
+  : 0;
+
 
   const amountToPay = user.time_slot === '7am-10pm' ? 2 : 1;
   const showPayButton = user.seat_number && user.paid === 0;
