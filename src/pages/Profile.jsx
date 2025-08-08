@@ -7,6 +7,8 @@ export default function Profile() {
   const [user, setUser] = useState(null);
   const [editing, setEditing] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
+  const [showPasswordFields, setShowPasswordFields] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     mob_number: '',
@@ -75,8 +77,6 @@ export default function Profile() {
       if (val !== null && val !== '') data.append(key, val);
     });
 
-    console.log('FormData entries:', Array.from(data.entries()));
-
     try {
       await axios.put(
         `https://studypalacebackend-production.up.railway.app/api/user/${email}`,
@@ -93,13 +93,11 @@ export default function Profile() {
 
   if (!user) return <p>Loading...</p>;
 
-  // Parse & format booked date
   const bookedDateObj = user.created_at ? new Date(user.created_at) : null;
   const formattedBookedDate = bookedDateObj
     ? bookedDateObj.toISOString().split('T')[0].replace(/-/g, '/')
     : 'NA';
 
-  // Valid till = booked + 30 days
   const validTillObj = bookedDateObj
     ? new Date(bookedDateObj.getTime() + 30 * 24 * 60 * 60 * 1000)
     : null;
@@ -107,18 +105,22 @@ export default function Profile() {
     ? validTillObj.toISOString().split('T')[0].replace(/-/g, '/')
     : 'NA';
 
-  // Days left
   const validDays = validTillObj
-  ? Math.ceil((validTillObj - new Date()) / (24 * 60 * 60 * 1000))
-  : 0;
+    ? Math.ceil((validTillObj - new Date()) / (24 * 60 * 60 * 1000))
+    : 0;
 
-
-  // **NEW**: decide amount and show Pay button if unpaid
   const amountToPay = user.time_slot === '7am-10pm' ? 2 : 1;
   const showPayButton = user.seat_number && user.paid === 0;
 
   return (
-    <div className="profile-container">
+    <div className={`profile-container ${darkMode ? 'dark-mode' : ''}`}>
+      <button
+        className="btn-dark-toggle"
+        onClick={() => setDarkMode(prev => !prev)}
+      >
+        {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+      </button>
+
       <img
         src={preview || user.photo}
         alt="Avatar"
@@ -156,44 +158,40 @@ export default function Profile() {
             placeholder="Address"
           />
 
-          {/* Seat & Time Slot (uncomment if needed)
-          <select name="seat_number" value={formData.seat_number} onChange={handleChange}>
-            <option value="">NA</option>
-            {[...Array(130)].map((_, i) => (
-              <option key={i+1} value={i+1}>{i+1}</option>
-            ))}
-          </select>
+          <button
+            type="button"
+            className="btn-toggle-password"
+            onClick={() => setShowPasswordFields(prev => !prev)}
+          >
+            {showPasswordFields ? 'Hide Password Fields' : 'Change Password'}
+          </button>
 
-          <select name="time_slot" value={formData.time_slot} onChange={handleChange}>
-            <option value="">NA</option>
-            {timeSlots.map((slot, idx) => (
-              <option key={idx} value={slot}>{slot}</option>
-            ))}
-          </select>
-          */}
-
-          <input
-            name="currentPassword"
-            type="password"
-            value={formData.currentPassword}
-            onChange={handleChange}
-            placeholder="Current Password"
-            required
-          />
-          <input
-            name="newPassword"
-            type="password"
-            value={formData.newPassword}
-            onChange={handleChange}
-            placeholder="New Password"
-          />
-          <input
-            name="confirmPassword"
-            type="password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            placeholder="Confirm New Password"
-          />
+          {showPasswordFields && (
+            <>
+              <input
+                name="currentPassword"
+                type="password"
+                value={formData.currentPassword}
+                onChange={handleChange}
+                placeholder="Current Password"
+                required
+              />
+              <input
+                name="newPassword"
+                type="password"
+                value={formData.newPassword}
+                onChange={handleChange}
+                placeholder="New Password"
+              />
+              <input
+                name="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm New Password"
+              />
+            </>
+          )}
 
           <button type="submit" className="btn-save">Save</button>
           <button type="button" className="btn-cancel" onClick={() => setEditing(false)}>Cancel</button>
