@@ -1,4 +1,4 @@
-// src/pages/UserProfile.jsx
+ // src/pages/UserProfile.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -118,4 +118,4 @@ export default function UserProfile() {
       </table>
     </div>
   );
-}
+}  
