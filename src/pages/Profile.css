@@ -190,3 +190,35 @@
     font-size: 14px;
   }
 }
+
+:root {
+  --bg-color: #f9f9f9;
+  --text-color: #333;
+  --card-bg: #eee;
+  --input-bg: #fff;
+}
+
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --card-bg: #1e1e1e;
+  --input-bg: #2c2c2c;
+}
+
+.profile-container {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.profile-info,
+.profile-id-section,
+.profile-name {
+  color: var(--text-color);
+}
+
+.profile-form input,
+.profile-form select {
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
