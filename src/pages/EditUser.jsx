@@ -48,7 +48,7 @@ export default function EditUser() {
     try {
       await axios.put(`https://studypalacebackend-production.up.railway.app/api/signup/${id}`, form);
       alert('User updated');
-      navigate('/admin/users');  // wherever your list lives
+      navigate('/admin/users');  // redirect to user list page
     } catch {
       alert('Update failed');
     }
@@ -68,8 +68,7 @@ export default function EditUser() {
           { label: 'Address', name: 'address' },
           { label: 'Gov ID', name: 'gov_id' },
           { label: 'Seat Number', name: 'seat_number' },
-          { label: 'Time Slot', name: 'time_slot' },
-        ].map(({ label, name, type='text' }) => (
+        ].map(({ label, name, type = 'text' }) => (
           <div key={name} className="field-row">
             <label>{label}</label>
             <input
@@ -80,6 +79,22 @@ export default function EditUser() {
             />
           </div>
         ))}
+
+        {/* Replace time_slot input with select dropdown */}
+        <div className="field-row">
+          <label>Time Slot</label>
+          <select
+            name="time_slot"
+            value={form.time_slot}
+            onChange={handleChange}
+          >
+            <option value="">-- Select Time Slot --</option>
+            <option value="7am-12pm">7am-12pm</option>
+            <option value="12pm-5pm">12pm-5pm</option>
+            <option value="5pm-10pm">5pm-10pm</option>
+            <option value="7am-10pm">7am-10pm</option>
+          </select>
+        </div>
 
         <div className="button-row">
           <button type="submit" className="btn-save">Save</button>
