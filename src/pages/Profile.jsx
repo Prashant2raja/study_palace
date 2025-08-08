@@ -9,6 +9,7 @@ export default function Profile() {
   const [preview, setPreview] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
   const [showPasswordFields, setShowPasswordFields] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     mob_number: '',
@@ -202,10 +203,14 @@ export default function Profile() {
           <p className="profile-info"><strong>Email:</strong> {user.email}</p>
           <p className="profile-info"><strong>Mobile:</strong> {user.mob_number}</p>
           <p className="profile-info"><strong>Address:</strong> {user.address}</p>
-          <p className="profile-info"><strong>Seat Number:</strong> {user.seat_number || 'NA'}</p>
-          <p className="profile-info"><strong>Time Slot:</strong> {user.time_slot || 'NA'}</p>
-          <p className="profile-info"><strong>Booked Date:</strong> {formattedBookedDate}</p>
-          <p className="profile-info"><strong>Valid till:</strong> {formattedValidTill} ({validDays} days left)</p>
+
+          {/* 👇 Updated layout for meta info */}
+          <div className="profile-meta-section">
+            <div className="profile-meta-item"><strong>Seat Number:</strong> {user.seat_number || 'NA'}</div>
+            <div className="profile-meta-item"><strong>Time Slot:</strong> {user.time_slot || 'NA'}</div>
+            <div className="profile-meta-item"><strong>Booked Date:</strong> {formattedBookedDate}</div>
+            <div className="profile-meta-item"><strong>Valid Till:</strong> {formattedValidTill} ({validDays} days left)</div>
+          </div>
 
           {showPayButton && (
             <button
