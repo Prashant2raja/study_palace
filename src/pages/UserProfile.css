@@ -1,92 +1,185 @@
-/* src/pages/UserProfile.css */
-
-.container {
-  padding: 24px;
-  max-width: 100%;
-  overflow-x: scroll;               /* show horizontal scrollbar */
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  scrollbar-gutter: stable;         /* keep gutter even when no scroll */
+/* ---
+  THEME & VARIABLES V2.0
+  "BUDHA LIBRARY" Palette
+--- */
+:root {
+  --primary-color: #6a1b9a; /* Deep Purple */
+  --primary-light: #ab47bc; /* Lighter Purple */
+  --primary-glow: rgba(171, 71, 188, 0.3);
+  --background-color: #f4f0f8; /* Very Light Purple BG */
+  --card-background: #ffffff;
+  --text-primary: #212121;
+  --text-secondary: #5f5f5f;
+  --border-color: #e0e0e0;
+  --success-color: #26a69a;
+  --danger-color: #ef5350;
+  --shadow-light: rgba(106, 27, 154, 0.1);
 }
 
-.container h2 {
-  margin-bottom: 16px;
-  font-size: 1.5rem;
-  color: #333;
-  font-weight: 600;
+/* ---
+  PAGE LAYOUT & CONTAINER
+--- */
+.admin-page {
+  background-color: var(--background-color);
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
 }
 
-.signup-table {
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: var(--card-background);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px var(--shadow-light);
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* ---
+  LOADING & ERROR STATES
+--- */
+.loading-container, .error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  color: var(--primary-color);
+}
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--primary-glow);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---
+  TABLE STYLES
+--- */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scroll on small screens */
+}
+
+.user-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
-.signup-table th,
-.signup-table td {
-  border: 1px solid #e0e0e0;
-  padding: 12px 8px;
+.user-table th,
+.user-table td {
+  padding: 16px;
   text-align: left;
   vertical-align: middle;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.signup-table th {
-  background-color: #1976d2;
-  color: #fff;
+.user-table thead th {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
   position: sticky;
   top: 0;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
+  z-index: 10;
 }
 
-.signup-table tr:nth-child(even) {
-  background-color: #f7f7f7;
+.user-table tbody tr {
+  transition: background-color 0.2s ease;
 }
 
-.signup-table tr:hover {
-  background-color: #eef1f5;
+.user-table tbody tr:hover {
+  background-color: var(--background-color);
 }
 
 .avatar-img {
-  width: 64px;                     /* increased size */
-  height: 64px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
 }
 
+/* ---
+  ACTION BUTTONS
+--- */
 .actions-cell {
   display: flex;
-  gap: 8px;
-  justify-content: flex-start;
+  gap: 10px;
 }
 
 .btn {
-  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: background-color 0.2s, transform 0.1s;
-}
-
-.edit-btn {
-  background-color: #0288d1;
-  color: #fff;
-}
-
-.delete-btn {
-  background-color: #d32f2f;
-  color: #fff;
+  color: white;
+  transition: all 0.2s ease;
 }
 
 .btn:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  filter: brightness(1.1);
 }
 
-.btn:active {
-  transform: translateY(0);
+.btn-edit { background-color: var(--primary-light); }
+.btn-delete { background-color: var(--danger-color); }
+
+/* ---
+  CUSTOM CONFIRMATION MODAL
+--- */
+.popup-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1100; animation: fadeIn 0.3s ease;
 }
+.popup-content.confirm-modal {
+  background-color: white; padding: 30px; border-radius: 15px;
+  text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  width: 90%; max-width: 450px;
+}
+.confirm-modal h3 { font-size: 1.5rem; margin-top: 0; margin-bottom: 1rem; color: var(--text-primary); }
+.confirm-modal p { color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6; }
+.popup-actions { display: flex; justify-content: center; gap: 1rem; }
+.btn-popup { padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: none; }
+.btn-popup.btn-cancel { background-color: #e0e0e0; color: var(--text-secondary); }
+.btn-popup.btn-confirm-delete { background-color: var(--danger-color); color: white; }
+
+/* ---
+  SITE FOOTER
+--- */
+.site-footer {
+  padding: 2rem;
+  margin-top: 40px;
+  background: var(--primary-color);
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  border-radius: 20px;
+}
+.site-footer p { margin: 0 0 10px 0; }
+.footer-links a { color: white; text-decoration: none; margin: 0 10px; transition: opacity 0.3s; }
+.footer-links a:hover { opacity: 0.8; }
