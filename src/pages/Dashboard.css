@@ -1,98 +1,297 @@
-/* General container styling */
+/* --- General Styling & Variables --- */
+:root {
+  --primary-color: #6a1b9a; /* Deep Purple */
+  --secondary-color: #42a5f5; /* Light Blue */
+  --background-light: #f3e5f5; /* Light Purple Background */
+  --text-dark: #333;
+  --text-light: #f8f9fa;
+  --card-background: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --glow-color: #ab47bc; /* Lighter Purple for Glow */
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-light);
+}
+
+/* --- Dashboard Container --- */
 .dashboard-container {
-  padding-top: 80px; /* Space for fixed navbar */
   text-align: center;
-  background-color: #f8f8f8;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-dark);
 }
 
-/* Background area */
-.background-image {
-  background: linear-gradient(to right, #e3f2fd, #ffffff);
-  padding: 30px 10px;
-  border-bottom: 2px solid #ddd;
+/* --- Welcome Banner Section --- */
+.welcome-banner {
+  position: relative;
+  padding: 60px 20px;
+  color: var(--text-light);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary-color), #8e24aa);
 }
 
-/* Heading and image area */
-.dashboard-heading-with-images {
+.welcome-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml,...'); /* Subtle background pattern */
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.welcome-content {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 25px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  z-index: 2;
 }
 
 .dashboard-heading {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #1a237e;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  margin: 0;
 }
 
-/* Side icons for heading */
+.dashboard-paragraph {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  max-width: 600px;
+}
+
 .side-icon {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
 }
 
-/* Glowing logo */
+/* --- Content & Cards --- */
+.content-container {
+  padding: 30px 20px;
+  max-width: 1000px;
+  margin: -40px auto 20px auto;
+  background: var(--card-background);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  position: relative;
+  z-index: 3;
+}
+
+/* --- Notification Card --- */
+.notification-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff3e0; /* Light Orange */
+  color: #e65100; /* Dark Orange */
+  padding: 15px 20px;
+  border-radius: 10px;
+  border-left: 5px solid #fb8c00; /* Orange Accent */
+  margin-bottom: 30px;
+}
+
+.notification-icon {
+  margin-right: 15px;
+}
+
+.notification-text h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+}
+
+.notification-text p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* --- Interactive Section --- */
+.interactive-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+/* --- Earth and Moon Animation --- */
+.earth-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.earth {
+  width: 100%;
+  height: 100%;
+  background: url('https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x5400x2700.jpg');
+  background-size: cover;
+  border-radius: 50%;
+  box-shadow: inset 10px 0 20px rgba(0,0,0,0.5), 0 0 15px #2c3e50;
+  animation: rotate-earth 30s linear infinite;
+}
+
+.moon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: #bdc3c7;
+  border-radius: 50%;
+  box-shadow: inset 2px 0 5px rgba(0,0,0,0.4);
+  top: 50%;
+  left: 50%;
+  margin-top: -15px;
+  margin-left: -15px;
+  animation: orbit-moon 8s linear infinite;
+}
+
+@keyframes rotate-earth {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+@keyframes orbit-moon {
+  from { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+}
+
+/* --- Quick Links --- */
+.quick-links-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  text-align: left;
+}
+
+.quick-links-card h2 {
+  margin-top: 0;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--background-light);
+  padding-bottom: 10px;
+}
+
+.quick-links-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quick-links-card li {
+  margin-bottom: 10px;
+}
+
+.quick-links-card a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.quick-links-card a:hover {
+  color: var(--primary-color);
+}
+
+/* --- Library Content --- */
+.library-section {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fafafa;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+.library-section h2 {
+  color: var(--primary-color);
+}
+
+/* --- Animations --- */
 .glowing-logo {
   animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
   from {
-    filter: drop-shadow(0 0 3px #2196f3);
+    filter: drop-shadow(0 0 5px var(--glow-color));
   }
   to {
-    filter: drop-shadow(0 0 12px #0d47a1);
+    filter: drop-shadow(0 0 20px var(--glow-color));
   }
 }
 
-/* Moving image animation */
 .moving-image {
-  animation: moveY 3s ease-in-out infinite;
+  animation: moveY 4s ease-in-out infinite;
 }
 
 @keyframes moveY {
   0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-12px); }
   100% { transform: translateY(0); }
 }
 
-/* Paragraph under heading */
-.dashboard-paragraph {
-  font-size: 1.1rem;
-  color: #333;
-  max-width: 600px;
-  margin: 0 auto 20px auto;
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* Content section with Hindi text */
-.content-container {
-  background-color: #fff;
+/* This is a simplified version; you'd use JavaScript Intersection Observer for a real implementation */
+.content-container:hover .animate-on-scroll {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notification-card.animate-on-scroll { transition-delay: 0.1s; }
+.interactive-section .earth-container.animate-on-scroll { transition-delay: 0.2s; }
+.interactive-section .quick-links-card.animate-on-scroll { transition-delay: 0.3s; }
+.library-section.animate-on-scroll:nth-of-type(1) { transition-delay: 0.4s; }
+.library-section.animate-on-scroll:nth-of-type(2) { transition-delay: 0.5s; }
+
+/* --- Footer --- */
+.dashboard-footer {
   padding: 20px;
-  margin: 20px auto;
-  max-width: 900px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: var(--primary-color);
+  color: var(--text-light);
 }
 
-.hindi-text {
-  font-size: 1.2rem;
-  margin-bottom: 15px;
-  color: #4e342e;
-  font-weight: 500;
-  line-height: 1.5;
+.footer-links {
+  margin-top: 10px;
 }
 
-/* Image strip at bottom */
-.image-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 30px 10px;
-  background-color: #e3f2fd;
+.footer-links a {
+  color: var(--text-light);
+  margin: 0 10px;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.footer-links a:hover {
+  opacity: 0.8;
+}
+
+/* --- Responsive Design for iPhone & smaller devices --- */
+@media (max-width: 768px) {
+  .dashboard-heading {
+    font-size: 2.2rem;
+  }
+  .welcome-content {
+    gap: 15px;
+  }
+  .side-icon {
+    width: 45px;
+    height: 45px;
+  }
+  .content-container {
+    margin: -30px 10px 20px 10px;
+    padding: 20px 15px;
+  }
+  .interactive-section {
+    flex-direction: column;
+  }
 }
