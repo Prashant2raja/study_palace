@@ -1,144 +1,264 @@
-/* ── Main Seat Container ────────────────────────────── */
-.seat-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 20px;
-  align-items: center;
+/* ---
+  THEME & VARIABLES V2.0
+  "BUDHA LIBRARY" Palette
+--- */
+:root {
+  --primary-color: #6a1b9a; /* Deep Purple */
+  --primary-light: #ab47bc; /* Lighter Purple */
+  --primary-glow: rgba(171, 71, 188, 0.3);
+  --background-color: #f4f0f8; /* Very Light Purple BG */
+  --card-background: #ffffff;
+  --text-primary: #212121;
+  --text-secondary: #5f5f5f;
+  --border-color: #e0e0e0;
+  --success-color: #26a69a; /* Teal for available seats */
+  --warning-color: #78909c; /* Blue Grey for limited */
+  --danger-color: #ef5350;  /* Red for all-shifts */
 }
 
-/* ── Seat Rows ───────────────────────────────────────── */
+/* ---
+  PAGE LAYOUT
+--- */
+.seat-booking-page {
+  background-color: var(--background-color);
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.seat-booking-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: var(--card-background);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* ---
+  FILTER BAR
+--- */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.filter-btn {
+  padding: 10px 25px;
+  border: 2px solid var(--border-color);
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--primary-light);
+  color: var(--primary-light);
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+/* ---
+  SEATING GRID
+--- */
+.seating-grid-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: var(--background-color);
+  border-radius: 15px;
+}
+
 .seat-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
 }
 
-/* ── Seat Box ────────────────────────────────────────── */
 .seat-box {
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  font-size: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 2px solid #ccc;
-  transition: transform 0.2s ease;
-  background-color: #eee;
-}
-
-.seat-box:hover {
-  transform: scale(1.05);
-}
-
-/* ── Seat Status Colors ──────────────────────────────── */
-.seat-box.available {
-  background-color: #6fcf97; /* green */
+  transition: all 0.2s ease-in-out;
   color: white;
+  border: none;
 }
 
-.seat-box.limited {
-  background-color: #4a90e2; /* blue */
-  color: white;
+.seat-box:hover:not(.disabled) {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
 
-.seat-box.all-shifts {
-  background-color: #eb5757; /* red */
-  color: white;
-}
+/* Status Colors */
+.seat-box.available { background-color: var(--success-color); }
+.seat-box.limited { background-color: var(--warning-color); }
+.seat-box.all-shifts { background-color: var(--danger-color); }
 
-/* ── Disable booked seats ───────────────────────────── */
 .seat-box.disabled {
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.7;
+  filter: grayscale(50%);
 }
 
-/* ── Popup for time slot selection ───────────────────── */
-.popup {
+/* ---
+  POPUP MODAL
+--- */
+.popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1100;
+  animation: fadeIn 0.3s ease;
 }
 
 .popup-content {
   background-color: white;
-  padding: 20px 30px;
-  border-radius: 10px;
+  padding: 30px;
+  border-radius: 15px;
   text-align: center;
-}
-
-.popup-content button {
-  margin: 8px;
-  padding: 8px 15px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-/* ── Filter Bar for Time Slots ───────────────────────── */
-.filter-bar {
-  margin-bottom: 20px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.filter-bar button {
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background: white;
-  transition: background-color 0.2s;
-}
-
-.filter-bar button.active {
-  background: #4a90e2;
-  color: white;
-}
-
-/* ── Legend ───────────────────────────────────────────── */
-.legend {
-  margin-top: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   width: 90%;
-  max-width: 600px;
+  max-width: 500px;
 }
 
-.legend h4 {
-  text-align: center;
-  margin-bottom: 10px;
+.popup-content h3 {
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.popup-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-popup {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.btn-popup:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.btn-popup.btn-cancel {
+  grid-column: 1 / -1;
+  background-color: var(--text-secondary);
+}
+
+/* ---
+  LEGEND
+--- */
+.legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  margin: 5px 0;
+  gap: 0.5rem;
 }
 
 .legend-box {
-  width: 25px;
-  height: 25px;
-  margin-right: 10px;
+  width: 20px;
+  height: 20px;
   border-radius: 5px;
-  border: 1px solid #333;
+}
+.legend-box.available { background-color: var(--success-color); }
+.legend-box.limited { background-color: var(--warning-color); }
+.legend-box.all-shifts { background-color: var(--danger-color); }
+
+/* ---
+  SITE FOOTER
+--- */
+.site-footer {
+  width: 100%;
+  padding: 2rem;
+  margin-top: 40px;
+  background: var(--primary-color);
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  border-radius: 0 0 20px 20px;
+  box-sizing: border-box; /* Ensures padding is included in width */
 }
 
-.legend-box.available {
-  background-color: #6fcf97;
+.site-footer p {
+  margin: 0 0 10px 0;
 }
 
-.legend-box.limited {
-  background-color: #4a90e2;
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: opacity 0.3s;
 }
 
-.legend-box.all-shifts {
-  background-color: #eb5757;
+.footer-links a:hover {
+  opacity: 0.8;
+}
+.footer-links span {
+    margin: 0 5px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .page-title { font-size: 2rem; }
+  .seating-grid-area { padding: 1rem; }
+  .seat-box { width: 35px; height: 35px; }
+  .popup-actions { grid-template-columns: 1fr; }
 }
