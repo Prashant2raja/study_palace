@@ -13,8 +13,6 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background-color: var(--background-light);
 }
 
@@ -39,7 +37,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('data:image/svg+xml,...'); /* Subtle background pattern */
   opacity: 0.1;
   z-index: 1;
 }
@@ -113,7 +110,7 @@ body {
 /* --- Interactive Section --- */
 .interactive-section {
   display: flex;
-  justify-content: space-around;
+  justify-content: center; /* Centered since it's the only item */
   align-items: center;
   gap: 30px;
   flex-wrap: wrap;
@@ -161,68 +158,32 @@ body {
   to { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
 }
 
-/* --- Quick Links --- */
-.quick-links-card {
-  background-color: #f9f9f9;
+/* --- Hindi Content Section --- */
+.hindi-content-section {
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px var(--shadow-color);
-  text-align: left;
-}
-
-.quick-links-card h2 {
-  margin-top: 0;
-  color: var(--primary-color);
-  border-bottom: 2px solid var(--background-light);
-  padding-bottom: 10px;
-}
-
-.quick-links-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.quick-links-card li {
-  margin-bottom: 10px;
-}
-
-.quick-links-card a {
-  text-decoration: none;
-  color: var(--secondary-color);
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.quick-links-card a:hover {
-  color: var(--primary-color);
-}
-
-/* --- Library Content --- */
-.library-section {
-  padding: 20px;
-  margin-bottom: 20px;
+  margin: 20px 0;
   background-color: #fafafa;
   border-radius: 10px;
   border: 1px solid #eee;
+  text-align: left;
 }
 
-.library-section h2 {
-  color: var(--primary-color);
+.hindi-text {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #4e342e;
+  font-weight: 500;
+  line-height: 1.6;
 }
 
-/* --- Animations --- */
+/* --- General Animations --- */
 .glowing-logo {
   animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
-  from {
-    filter: drop-shadow(0 0 5px var(--glow-color));
-  }
-  to {
-    filter: drop-shadow(0 0 20px var(--glow-color));
-  }
+  from { filter: drop-shadow(0 0 5px var(--glow-color)); }
+  to { filter: drop-shadow(0 0 20px var(--glow-color)); }
 }
 
 .moving-image {
@@ -235,23 +196,28 @@ body {
   100% { transform: translateY(0); }
 }
 
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+/* --- Fade-in Animation on Load --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* This is a simplified version; you'd use JavaScript Intersection Observer for a real implementation */
-.content-container:hover .animate-on-scroll {
-  opacity: 1;
-  transform: translateY(0);
+.animate-on-load {
+  opacity: 0; /* Start hidden */
+  animation: fadeInUp 0.7s ease-out forwards; /* Apply animation */
 }
 
-.notification-card.animate-on-scroll { transition-delay: 0.1s; }
-.interactive-section .earth-container.animate-on-scroll { transition-delay: 0.2s; }
-.interactive-section .quick-links-card.animate-on-scroll { transition-delay: 0.3s; }
-.library-section.animate-on-scroll:nth-of-type(1) { transition-delay: 0.4s; }
-.library-section.animate-on-scroll:nth-of-type(2) { transition-delay: 0.5s; }
+/* Stagger the animation for each element */
+.notification-card.animate-on-load { animation-delay: 0.1s; }
+.interactive-section .earth-container.animate-on-load { animation-delay: 0.2s; }
+.hindi-content-section.animate-on-load { animation-delay: 0.3s; }
+
 
 /* --- Footer --- */
 .dashboard-footer {
@@ -290,8 +256,5 @@ body {
   .content-container {
     margin: -30px 10px 20px 10px;
     padding: 20px 15px;
-  }
-  .interactive-section {
-    flex-direction: column;
   }
 }
