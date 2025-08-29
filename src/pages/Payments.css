@@ -1,265 +1,290 @@
-/* --- Root Variables for Theming --- */
+/* ---
+  THEME & VARIABLES V2.0
+  "BUDHA LIBRARY" Palette
+--- */
 :root {
-  --primary-color: #6a1b9a;
-  --secondary-color: #42a5f5;
-  --background-light: #f3e5f5;
-  --text-dark: #333;
-  --text-light: #f8f9fa;
+  --primary-glow: rgba(171, 71, 188, 0.4);
+  --primary-color: #6a1b9a; /* Deep Purple */
+  --primary-light: #ab47bc; /* Lighter Purple */
+  --secondary-color: #29b6f6; /* Vibrant Blue */
+  --background-color: #f4f0f8; /* Very Light Purple BG */
   --card-background: #ffffff;
-  --shadow-color: rgba(106, 27, 154, 0.1);
-  --success-color: #43a047;
-  --danger-color: #e53935;
-  --warning-color: #ff9800;
+  --text-primary: #212121;
+  --text-secondary: #5f5f5f;
   --border-color: #e0e0e0;
+  --success-color: #26a69a; /* Teal */
+  --danger-color: #ef5350; /* Red */
+  --shadow-light: rgba(106, 27, 154, 0.1);
+  --shadow-medium: rgba(106, 27, 154, 0.15);
 }
 
 .profile-page.dark-mode {
   --primary-color: #ab47bc;
-  --background-light: #121212;
-  --text-dark: #e0e0e0;
+  --primary-light: #ce93d8;
+  --background-color: #121212;
   --card-background: #1e1e1e;
-  --shadow-color: rgba(0, 0, 0, 0.2);
+  --text-primary: #ffffff;
+  --text-secondary: #bdbdbd;
   --border-color: #424242;
+  --shadow-light: rgba(0, 0, 0, 0.2);
+  --shadow-medium: rgba(0, 0, 0, 0.3);
 }
 
-/* --- Page and Container --- */
+
+/* ---
+  GLOBAL STYLES & LAYOUT
+--- */
 .profile-page {
-  background-color: var(--background-light);
+  background-color: var(--background-color);
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(233, 213, 255, 0.2));
   min-height: 100vh;
-  padding: 40px 15px;
+  padding: 50px 15px;
   font-family: 'Segoe UI', 'Roboto', sans-serif;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.4s ease;
 }
 
 .profile-container {
-  max-width: 700px;
+  max-width: 750px;
   margin: auto;
-  padding: 30px;
   background-color: var(--card-background);
-  border-radius: 16px;
-  box-shadow: 0 8px 30px var(--shadow-color);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px var(--shadow-medium);
+  overflow: hidden; /* Important for inner elements */
+  animation: fadeInFromBottom 0.6s ease-out forwards;
+  opacity: 0;
   text-align: center;
   position: relative;
-  transition: all 0.3s ease;
 }
 
-/* --- Loading Spinner --- */
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  color: var(--primary-color);
-}
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(171, 71, 188, 0.3);
-  border-top-color: var(--primary-color);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
+@keyframes fadeInFromBottom {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* --- Dark Mode Toggle --- */
-.btn-dark-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: 1px solid var(--border-color);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.2rem;
-  display: grid;
-  place-items: center;
-  transition: all 0.3s ease;
-}
-.btn-dark-toggle:hover {
-  background-color: var(--background-light);
-  transform: scale(1.1) rotate(15deg);
+
+/* ---
+  PROFILE HEADER & AVATAR
+--- */
+.profile-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  padding: 80px 20px 40px 20px;
+  margin-bottom: 80px; /* Space for the avatar to overlap */
+  position: relative;
 }
 
-/* --- Avatar Styling --- */
 .profile-avatar {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 20px;
-  border: 4px solid var(--primary-color);
-  box-shadow: 0 4px 15px var(--shadow-color);
-  transition: transform 0.3s ease;
+  border: 5px solid #fff;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: -75px; /* Halfway out */
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .profile-avatar:hover {
-  transform: scale(1.05);
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 8px 35px var(--primary-glow);
 }
 
-/* --- Profile View Mode --- */
+.profile-content {
+  padding: 20px 30px;
+}
+
+
+/* ---
+  PROFILE VIEW MODE STYLES
+--- */
 .profile-view .profile-name {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  color: var(--text-dark);
-  margin: 0 0 20px 0;
+  color: var(--text-primary);
+  margin: 0 0 10px 0;
 }
 
-.profile-details-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
+.profile-view .profile-email {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 25px;
+}
+
+.details-section {
   text-align: left;
   margin-bottom: 25px;
-  color: var(--text-dark);
 }
+
+.section-title {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--background-color);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
 .detail-item {
-  background-color: var(--background-light);
-  padding: 12px;
-  border-radius: 8px;
+  background-color: var(--background-color);
+  padding: 15px;
+  border-radius: 12px;
   font-size: 1rem;
+  color: var(--text-secondary);
+  border-left: 4px solid var(--primary-light);
 }
-.detail-item.full-width {
-  grid-column: 1 / -1;
-}
+
 .detail-item strong {
   font-weight: 600;
-  color: var(--primary-color);
-  margin-right: 8px;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 4px;
 }
 
-/* --- Subscription Status Card --- */
-.profile-status-card {
-  background: linear-gradient(135deg, #6a1b9a, #8e24aa);
-  color: var(--text-light);
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 25px;
-}
-.profile-status-card h3 {
-  margin-top: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  padding-bottom: 10px;
-}
-.status-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  text-align: left;
-  margin-bottom: 20px;
-}
 
-/* --- Validity Progress Bar --- */
+/* ---
+  VALIDITY PROGRESS BAR
+--- */
 .validity-progress p {
   margin: 10px 0 0;
   font-size: 0.9rem;
-}
-.progress-bar-background {
-  width: 100%;
-  height: 12px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  overflow: hidden;
-}
-.progress-bar-fill {
-  height: 100%;
-  background-color: var(--warning-color);
-  border-radius: 6px;
-  transition: width 0.5s ease-in-out;
+  color: var(--text-secondary);
 }
 
-/* --- Actions (Edit, Pay Buttons) --- */
-.profile-actions {
+.progress-bar-background {
+  height: 10px;
+  background-color: var(--border-color);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary-color), #81d4fa);
+  border-radius: 5px;
+  transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+
+/* ---
+  BUTTONS
+--- */
+.profile-actions, .form-actions {
   display: flex;
   justify-content: center;
   gap: 15px;
-  flex-wrap: wrap;
+  margin-top: 30px;
 }
 
-/* --- Form Styling (Editing Mode) --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 50px; /* Pill shape */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--shadow-light);
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px var(--shadow-medium);
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  color: white;
+}
+
+.btn-danger {
+  background: var(--danger-color);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--card-background);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-pay {
+  background: linear-gradient(90deg, #ffc107, #ff9800);
+  color: #212121;
+}
+
+
+/* ---
+  EDIT FORM STYLES
+--- */
 .profile-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.form-avatar-upload {
-  position: relative;
-  display: inline-block;
-}
-.form-avatar-upload .profile-avatar {
-  opacity: 0.7;
-}
-.form-avatar-upload label {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-#photo-upload {
-  display: none;
+  padding: 20px 30px;
 }
 
 .profile-form input, .profile-form textarea {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
+  margin-bottom: 15px;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background-color: var(--background-light);
-  color: var(--text-dark);
+  border-radius: 10px;
+  background-color: var(--background-color);
+  color: var(--text-primary);
   font-size: 1rem;
-}
-.profile-form textarea {
-  resize: vertical;
-}
-
-.password-fields {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
-  border-left: 3px solid var(--primary-color);
-  padding-left: 15px;
-}
-.form-actions {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-/* --- Universal Button Styles --- */
-.btn-edit, .btn-save, .btn-cancel, .btn-pay, .btn-upload, .btn-toggle-password {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
   transition: all 0.3s ease;
 }
-.btn-edit:hover, .btn-save:hover, .btn-cancel:hover, .btn-pay:hover, .btn-upload:hover, .btn-toggle-password:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+.profile-form input:focus, .profile-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+  background-color: var(--card-background);
 }
 
-.btn-edit { background-color: var(--secondary-color); color: white; }
-.btn-save { background-color: var(--success-color); color: white; }
-.btn-cancel { background-color: var(--danger-color); color: white; }
-.btn-pay { background-color: var(--warning-color); color: white; }
-.btn-upload { background-color: rgba(0,0,0,0.6); color: white; padding: 10px 20px; }
-.btn-toggle-password { background-color: transparent; color: var(--primary-color); border: 1px solid var(--primary-color); width: 100%; justify-content: center; }
 
-/* --- Responsive Design --- */
+/* ---
+  RESPONSIVE DESIGN
+--- */
 @media (max-width: 600px) {
-  .profile-page { padding: 20px 10px; }
-  .profile-container { padding: 20px; }
-  .profile-avatar { width: 120px; height: 120px; }
-  .profile-name { font-size: 1.5rem; }
-  .profile-details-grid, .status-grid { grid-template-columns: 1fr; }
-  .btn-dark-toggle { top: 10px; right: 10px; }
+  .profile-page {
+    padding: 20px 10px;
+  }
+  .profile-container {
+    border-radius: 15px;
+  }
+  .profile-header {
+    padding-top: 60px;
+    margin-bottom: 60px;
+  }
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+    bottom: -60px;
+  }
+  .profile-content {
+    padding: 15px;
+  }
+  .profile-name {
+    font-size: 1.8rem;
+  }
+  .profile-actions, .form-actions {
+    flex-direction: column;
+  }
+  .btn {
+    width: 100%;
+  }
 }
