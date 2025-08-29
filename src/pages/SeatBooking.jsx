@@ -1,5 +1,3 @@
-// SeatBooking.jsx
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -17,10 +15,7 @@ const timeSlots = ["7am-12pm", "12pm-5pm", "5pm-10pm", "7am-10pm"];
 
 export default function SeatBooking() {
   const navigate = useNavigate();
-
-  const [filterSlot, setFilterSlot] = useState(() => {
-    return localStorage.getItem("filterSlot") || timeSlots[0];
-  });
+  const [filterSlot, setFilterSlot] = useState(() => localStorage.getItem("filterSlot") || timeSlots[0]);
   const [seats, setSeats] = useState({});
   const [selectedSeat, setSelectedSeat] = useState(null);
 
@@ -30,40 +25,25 @@ export default function SeatBooking() {
 
   useEffect(() => {
     localStorage.setItem("filterSlot", filterSlot);
-
-    const slotRequest = axios.get(
-      `https://studypalacebackend-production.up.railway.app/api/seats?timeSlot=${filterSlot}`,
-      { headers: authHeader }
-    );
-
-    const allDayRequest = axios.get(
-      `https://studypalacebackend-production.up.railway.app/api/seats?timeSlot=7am-10pm`,
-      { headers: authHeader }
-    );
+    const slotRequest = axios.get(`https://studypalacebackend-production.up.railway.app/api/seats?timeSlot=${filterSlot}`, { headers: authHeader });
+    const allDayRequest = axios.get(`https://studypalacebackend-production.up.railway.app/api/seats?timeSlot=7am-10pm`, { headers: authHeader });
 
     Promise.all([slotRequest, allDayRequest])
       .then(([slotRes, allDayRes]) => {
         const map = {};
-
-        // Step 1: initialize all seats as available
         seatRanges.forEach((range) => {
           for (let i = range.start; i <= range.end; i++) {
             map[i] = { status: "available", timeSlot: null };
           }
         });
-
-        // Step 2: apply all-day bookings first (they should always be red)
         allDayRes.data.forEach(({ seat_number }) => {
           map[seat_number] = { status: "all-shifts", timeSlot: "7am-10pm" };
         });
-
-        // Step 3: apply time-slot specific bookings if not already booked for all shifts
         slotRes.data.forEach(({ seat_number, status }) => {
           if (map[seat_number].status !== "all-shifts") {
             map[seat_number] = { status, timeSlot: filterSlot };
           }
         });
-
         setSeats(map);
       })
       .catch((err) => console.error("Error fetching seat data:", err));
@@ -81,16 +61,10 @@ export default function SeatBooking() {
 
   const handleTimeSelect = (slot) => {
     axios
-      .post(
-        "https://studypalacebackend-production.up.railway.app/api/bookings",
-        { seat_number: selectedSeat, time_slot: slot },
-        { headers: authHeader }
-      )
+      .post("https://studypalacebackend-production.up.railway.app/api/bookings", { seat_number: selectedSeat, time_slot: slot }, { headers: authHeader })
       .then(() => {
         const amount = slot === "7am-10pm" ? 2 : 1;
-        navigate(
-          `/payments?seat=${selectedSeat}&slot=${slot}&amount=${amount}`
-        );
+        navigate(`/payments?seat=${selectedSeat}&slot=${slot}&amount=${amount}`);
       })
       .catch((err) => {
         const msg = err.response?.data?.error || "Booking failed";
@@ -101,75 +75,78 @@ export default function SeatBooking() {
   const closePopup = () => setSelectedSeat(null);
 
   return (
-    <div className="seat-container">
-      {/* Time-slot filter bar */}
-      <div className="filter-bar">
-        {timeSlots.map((slot) => (
-          <button
-            key={slot}
-            className={slot === filterSlot ? "active" : ""}
-            onClick={() => handleFilterClick(slot)}
-          >
-            {slot}
-          </button>
-        ))}
+    <div className="seat-booking-page">
+      <div className="seat-booking-container">
+        <h1 className="page-title">Book Your Seat</h1>
+        <p className="page-subtitle">Select a time slot to view available seats</p>
+
+        <div className="filter-bar">
+          {timeSlots.map((slot) => (
+            <button key={slot} className={`filter-btn ${slot === filterSlot ? "active" : ""}`} onClick={() => handleFilterClick(slot)}>
+              {slot}
+            </button>
+          ))}
+        </div>
+
+        <div className="seating-grid-area">
+          {seatRanges.map((range, rowIndex) => (
+            <div className="seat-row" key={rowIndex}>
+              {Array.from({ length: range.end - range.start + 1 }, (_, i) => {
+                const seatNumber = range.start + i;
+                const seat = seats[seatNumber] || { status: "available" };
+                return (
+                  <div key={seatNumber} className={`seat-box ${seat.status} ${seat.status !== "available" ? "disabled" : ""}`} onClick={() => handleSeatClick(seatNumber)}>
+                    {seatNumber}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+
+        <div className="legend">
+          <div className="legend-item">
+            <div className="legend-box available"></div>
+            <span>Available</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-box limited"></div>
+            <span>Booked (This Slot)</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-box all-shifts"></div>
+            <span>Booked (All Day)</span>
+          </div>
+        </div>
       </div>
 
-      {/* Seat grid */}
-      {seatRanges.map((range, rowIndex) => (
-        <div className="seat-row" key={rowIndex}>
-          {Array.from({ length: range.end - range.start + 1 }, (_, i) => {
-            const seatNumber = range.start + i;
-            const seat = seats[seatNumber] || { status: "available" };
-
-            return (
-              <div
-                key={seatNumber}
-                className={`seat-box ${seat.status} ${
-                  seat.status !== "available" ? "disabled" : ""
-                }`}
-                onClick={() => handleSeatClick(seatNumber)}
-              >
-                {seatNumber}
-              </div>
-            );
-          })}
-        </div>
-      ))}
-
-      {/* Popup for time selection */}
       {selectedSeat && (
-        <div className="popup">
+        <div className="popup-overlay">
           <div className="popup-content">
-            <h3>Select time slot for Seat {selectedSeat}</h3>
-            {timeSlots.map((slot) => (
-              <button key={slot} onClick={() => handleTimeSelect(slot)}>
-                {slot}
-              </button>
-            ))}
-            <button onClick={closePopup} style={{ marginTop: "10px" }}>
+            <h3>Select Time Slot for Seat <strong>{selectedSeat}</strong></h3>
+            <div className="popup-actions">
+                {timeSlots.map((slot) => (
+                    <button key={slot} className="btn-popup" onClick={() => handleTimeSelect(slot)}>
+                        Book for {slot}
+                    </button>
+                ))}
+            </div>
+            <button className="btn-popup btn-cancel" onClick={closePopup}>
               Cancel
             </button>
           </div>
         </div>
       )}
-
-      {/* Legend */}
-      <div className="legend">
-        <h4>Seat Color Legend:</h4>
-        <div className="legend-item">
-          <div className="legend-box available"></div>
-          <span>Green: Available</span>
+      
+      {/* --- Website Footer --- */}
+      <footer className="site-footer">
+        <p>&copy; 2025 BUDHA LIBRARY. All Rights Reserved.</p>
+        <div className="footer-links">
+          <a href="#privacy">Privacy Policy</a>
+          <span>|</span>
+          <a href="#terms">Terms of Service</a>
         </div>
-        <div className="legend-item">
-          <div className="legend-box limited"></div>
-          <span>Blue: Booked for another shift</span>
-        </div>
-        <div className="legend-item">
-          <div className="legend-box all-shifts"></div>
-          <span>Red: Booked 7am–10pm (blocked everywhere)</span>
-        </div>
-      </div>
+      </footer>
     </div>
   );
 }
