@@ -32,7 +32,7 @@
 
 .profile-container {
   max-width: 750px;
-  margin: auto;
+  margin: 0 auto 50px auto; /* Centered with bottom margin to push footer */
   background-color: var(--card-background);
   border-radius: 20px;
   box-shadow: 0 10px 40px var(--shadow-medium);
@@ -193,10 +193,42 @@
 --- */
 .site-footer {
   padding: 2rem;
-  margin-top: 40px;
   background: var(--primary-color);
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
 }
 .site-footer p { margin: 0; }
+
+/* ---
+  RESPONSIVE DESIGN (FOR IPHONES & SMALLER DEVICES)
+--- */
+@media screen and (max-width: 600px) {
+  .profile-page {
+    padding: 20px 10px;
+  }
+  .profile-header {
+    height: 120px;
+  }
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+    margin-top: -60px;
+  }
+  .profile-content {
+    padding: 15px 20px 30px;
+  }
+  .profile-name {
+    font-size: 1.8rem;
+  }
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+  .profile-actions, .form-actions {
+    gap: 10px;
+  }
+}
 
