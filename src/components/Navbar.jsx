@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import './Navbar.css';
+import '/components/Navbar.css';
+
 
 // Simple SVG icon for the logo
 const LogoIcon = () => (
